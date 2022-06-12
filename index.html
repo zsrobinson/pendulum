@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Double Pendulum</title>
+
+	<link rel="stylesheet" href="assets/bulma/bulma.min.css" />
+	<link rel="stylesheet" href="assets/bulma/bulma-prefers-dark.min.css" />
+	<link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+</head>
+
+<body>
+	<section class="section">
+		<div class="container">
+			<div class="columns">
+				<div class="column">
+					<h1 class="title">Double Pendulum Simulation</h1>
+					<p class="subtitle">Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
+
+					<h2 class="heading">Time Controls</h2>
+
+					<div class="block">
+						<div class="buttons has-addons">
+							<button class="button">
+								<span class="icon">
+									<i class="fa-solid fa-play"></i>
+								</span>
+								<span>Start</span>
+							</button>
+							<button class="button">
+								<span class="icon">
+									<i class="fa-solid fa-pause"></i>
+								</span>
+								<span>Pause</span>
+							</button>
+							<button class="button">
+								<span class="icon">
+									<i class="fa-solid fa-arrow-rotate-right"></i>
+								</span>
+								<span>Restart</span>
+							</button>
+						</div>
+					</div>
+
+					<h2 class="heading">Parameters</h2>
+
+					<div class="block">
+
+						<div class="box">
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-weight-hanging"></i>
+										</span>
+										<strong>Force of Gravity</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>9.81 Meters per Second</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="box">
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-weight-hanging"></i>
+										</span>
+										<strong>Mass 1</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>40 Kilograms</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-chart-pie"></i>
+										</span>
+										<strong>Angle 1</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>45 Degrees</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-ruler"></i>
+										</span>
+										<strong>Length 1</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>1 Meter</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="box">
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-weight-hanging"></i>
+										</span>
+										<strong>Mass 2</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>40 Kilograms</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-chart-pie"></i>
+										</span>
+										<strong>Angle 2</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>45 Degrees</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+							<div class="level">
+								<div class="level-item">
+									<span class="icon-text">
+										<span class="icon">
+											<i class="fa-solid fa-ruler"></i>
+										</span>
+										<strong>Length 2</strong>
+									</span>
+								</div>
+								<div class="level-item">
+									<p>1 Meter</p>
+								</div>
+								<div class="level-item">
+									<input type="range" id="volume" name="volume" min="0" max="11">
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="column">
+					<div class="box">
+						<canvas id="canvas" width="1" height="1" style="border: 1px lightgray solid; width: 100%; height: 100%;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
