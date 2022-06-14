@@ -16,41 +16,83 @@
 <body>
 	<div class="sim" id="sim"></div>
 	<div class="controls">
-		<h1>Double Pendulum Simulation</h1>
-		<p>Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
-
-		<h2>Time Controls</h2>
-		<button>
-			<i class="fa-solid fa-play"></i>
-			<span>Start</span>
-		</button>
-		<button>
-			<i class="fa-solid fa-pause"></i>
-			<span>Pause</span>
-		</button>
-		<button>
-			<i class="fa-solid fa-arrow-rotate-right"></i>
-			<span>Restart</span>
-		</button>
-
-		<h2>Parameters</h2>
-		<div class="parameter">
-			<i class="fa-solid fa-weight-hanging"></i>
-			<strong>Force of Gravity</strong>
-			<p>9.81 Meters per Second</p>
-			<input type="range" id="volume" name="volume" min="0" max="11">
+		<div class="header">
+			<h1>Double Pendulum Simulation</h1>
+			<p>Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
+			<p>View this project on <a href="https://github.com/zsrobinson/pendulum">GitHub</a></p>	
 		</div>
-		<div class="parameter">
-			<i class="fa-solid fa-weight-hanging"></i>
-			<strong>Force of Gravity</strong>
-			<p>9.81 Meters per Second</p>
-			<input type="range" id="volume" name="volume" min="0" max="11">
+	
+		<div class="group" id="time-controls">
+			<h2>Time Controls</h2>
+			<div>
+				<button id="play-button">
+					<i class="fa-solid fa-play"></i>
+					<span>Start</span>
+				</button>
+				<button id="pause-button">
+					<i class="fa-solid fa-pause"></i>
+					<span>Pause</span>
+				</button>
+				<button id="restart-button">
+					<i class="fa-solid fa-arrow-rotate-right"></i>
+					<span>Restart</span>
+				</button>
+			</div>
 		</div>
-		<div class="parameter">
-			<i class="fa-solid fa-weight-hanging"></i>
-			<strong>Force of Gravity</strong>
-			<p>9.81 Meters per Second</p>
-			<input type="range" id="volume" name="volume" min="0" max="11">
+
+		<div class="group" id="parameters">
+			<h2>Parameters</h2>
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-earth-americas"></i>
+					<strong>Force of Gravity</strong>
+					<p id="g-output">9.81 m/s^2</p>
+				</div>
+				<input type="range" id="g-input" min="0" max="11">
+			</div>
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-feather-pointed"></i>
+					<strong>Damping</strong>
+					<p id="damp-output">0.001 m/s</p>
+				</div>
+				<input type="range" id="damp-input" min="0" max="11">
+			</div>
+
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-ruler"></i>
+					<strong>Length 1</strong>
+					<p id="len1-output">1 m</p>
+				</div>
+				<input type="range" id="len1-input" min="0" max="11">
+			</div>
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-weight-hanging"></i>
+					<strong>Mass 1</strong>
+					<p id="mass1-output">1 kg</p>
+				</div>
+				<input type="range" id="mass1-input" min="0" max="11">
+			</div>
+
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-ruler"></i>
+					<strong>Length 2</strong>
+					<p id="len2-output">1 m</p>
+				</div>
+				<input type="range" id="len2-input" min="0" max="11">
+			</div>
+			<div class="parameter">
+				<div>
+					<i class="fa-solid fa-weight-hanging"></i>
+					<strong>Mass 2</strong>
+					<p id="mass2-output">1 kg</p>
+				</div>
+				<input type="range" id="mass2-input" min="0" max="11">
+			</div>
+
 		</div>
 
 	</div>

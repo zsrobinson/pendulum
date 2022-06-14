@@ -1,27 +1,114 @@
 :root {
-    --theme: rgb(29, 30, 32);
-    --entry: rgb(46, 46, 51);
-    --primary: rgb(218, 218, 219);
-    --secondary: rgb(155, 156, 157);
-    --tertiary: rgb(65, 66, 68);
-    --border: rgb(51, 51, 51);
+	--theme: rgb(29, 30, 32);
+	--entry: rgb(46, 46, 51);
+	--primary: rgb(218, 218, 219);
+	--secondary: rgb(155, 156, 157);
+	--tertiary: rgb(65, 66, 68);
+	--border: rgb(51, 51, 51);
 }
 
-body {
-    font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen,Ubuntu,Cantarell,open sans,helvetica neue,sans-serif;
-    color: var(--primary);
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body, button {
+	font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen,Ubuntu,Cantarell,open sans,helvetica neue,sans-serif;
+	color: var(--primary);
+	background-color: var(--theme);
+}
+
+a {
+	color: #83a8cd;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #b2d4f7;
+    transition: all ease 100ms;
+}
+
+.controls {
+	margin: 1rem;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: baseline;
+	gap: 1rem
+}
+
+.controls > .group {
+	padding: 1rem;
+	border-radius: 1rem;
+	display: inline-flex;
+	flex-direction: column;
+	background-color: var(--entry);
+	gap: 1rem;
+}
+
+.controls > .group > h2 {
+	color: var(--secondary);
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.parameter > div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.25rem;
+}
+
+.parameter > div > p {
+	color: var(--secondary);
+}
+
+.parameter > input {
+	width: 100%;
+	background-color: pink
+}
+
+#time-controls > div {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem
+}
+
+button {
+	font-size: 1rem;
+	background: var(--entry);
+	border: var(--theme) 4px solid;
+    border-radius: .5rem;
+    padding: .5rem 0.75rem;
+    transition: all ease 100ms;
+	cursor: pointer;
+}
+
+button:active{
+	transform:scale(.96)
+}
+
+button:hover {
+	background: var(--tertiary);
+}
+
+button > span {
+	padding-left: 0.1rem;
 }
 
 .sim {
-    /* fill up the entire screen */
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	/* fill up the entire screen */
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 
-    /* set behind everything else */
-    z-index: -100;
+	/* set behind everything else */
+	z-index: -100;
 }
