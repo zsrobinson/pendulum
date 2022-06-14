@@ -8,7 +8,7 @@ let color = {
 	border: "rgb(51, 51, 51)"
 }
 
-let len1, len2, mass1, mass2, angle1, angle2, vel1, vel2, g, damp, xoffset, yoffset, px2, py2, trail, firstFrame;
+let len1, len2, mass1, mass2, angle1, angle2, vel1, vel2, g, damp, xoffset, yoffset, px2, py2, trail, firstFrame, fr;
 
 function setVars() {
 	len1 = 150;
@@ -24,6 +24,7 @@ function setVars() {
 	firstFrame = true;
 	xoffset = width/2;
 	yoffset = height/4;
+	fr = 60;
 }
 
 function setup() {
@@ -33,13 +34,18 @@ function setup() {
 
 	setVars();
 	noLoop();
+	frameRate(fr);
 
 	trail = createGraphics(div.offsetWidth, div.offsetHeight);
 	trail.background(color.theme);
 	trail.translate(xoffset, yoffset);
+
+	setFrameRate(60)
 }
 
 function draw() {
+	/* setFrameRate(60) */
+	document.getElementById("fps").innerHTML = "FPS: " + frameRate()
 	
 	image(trail, 0, 0)
 
@@ -87,6 +93,7 @@ function draw() {
 }
 
 window.onresize = () => {
+	loop();
 	setup();
 }
 
