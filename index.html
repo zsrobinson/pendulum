@@ -20,9 +20,6 @@
 			<h1>Double Pendulum Simulation</h1>
 			<p>Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
 			<p>View this project on <a href="https://github.com/zsrobinson/pendulum">GitHub</a></p>	
-			<p id="fps"></p>
-			<p id="delta"></p>
-			<p id="seconds"></p>
 		</div>
 	
 		<div class="group" id="time-controls">
@@ -49,53 +46,53 @@
 				<div>
 					<i class="fa-solid fa-earth-americas"></i>
 					<strong>Force of Gravity</strong>
-					<p id="g-output">9.81 m/s^2</p>
+					<p id="g-output">9.81 m/s²</p>
 				</div>
-				<input type="range" id="g-input" min="0" max="11">
+				<input type="range" id="g-input" min="1" max="30" value="9.81" step="0.01">
 			</div>
 			<div class="parameter">
 				<div>
 					<i class="fa-solid fa-feather-pointed"></i>
 					<strong>Damping</strong>
-					<p id="damp-output">0.001 m/s</p>
+					<p id="dampRate-output">0.05 m/s²</p>
 				</div>
-				<input type="range" id="damp-input" min="0" max="11">
+				<input type="range" id="dampRate-input" min="0" max="1" value="0.05" step=".025">
 			</div>
 
 			<div class="parameter">
 				<div>
 					<i class="fa-solid fa-ruler"></i>
 					<strong>Length 1</strong>
-					<p id="len1-output">1 m</p>
+					<p id="len1-output">1.5 m</p>
 				</div>
-				<input type="range" id="len1-input" min="0" max="11">
+				<input type="range" id="len1-input" min="0.5" max="5" value="1.5" step="0.1">
 			</div>
 			<div class="parameter">
 				<div>
 					<i class="fa-solid fa-weight-hanging"></i>
 					<strong>Mass 1</strong>
-					<p id="mass1-output">1 kg</p>
+					<p id="mass1-output">30 kg</p>
 				</div>
-				<input type="range" id="mass1-input" min="0" max="11">
+				<input type="range" id="mass1-input" min="10" max="100" value="30">
 			</div>
 
 			<div class="parameter">
 				<div>
 					<i class="fa-solid fa-ruler"></i>
 					<strong>Length 2</strong>
-					<p id="len2-output">1 m</p>
+					<p id="len2-output">1.5 m</p>
 				</div>
-				<input type="range" id="len2-input" min="0" max="11">
+				<input type="range" id="len2-input" min="0.5" max="5" value="1.5" step="0.1">
 			</div>
 			<div class="parameter">
 				<div>
 					<i class="fa-solid fa-weight-hanging"></i>
 					<strong>Mass 2</strong>
-					<p id="mass2-output">1 kg</p>
+					<p id="mass2-output">30 kg</p>
 				</div>
-				<input type="range" id="mass2-input" min="0" max="11">
+				<input type="range" id="mass2-input" min="10" max="100" value="30">
 			</div>
-			<p>Simulation is not to scale.</p>	
+			<p>Units may not be to scale.</p>	
 
 
 		</div>

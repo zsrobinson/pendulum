@@ -8,20 +8,21 @@ let color = {
 	border: "rgb(51, 51, 51)"
 }
 
-let len1, len2, mass1, mass2, angle1, angle2, vel1, vel2, g, damp, xoffset, yoffset, px2, py2, trail, firstFrame, fr;
+let len1, len2, mass1, mass2, angle1, angle2, vel1, vel2, g, dampRate, xoffset, yoffset, px2, py2, trail, firstFrame, fr;
 let startButtonTime;
+let x1, y1, x2, y2;
 
 function setVars() {
-	len1 = 1;
-	len2 = 1;
-	mass1 = 20;
-	mass2 = 100;
-	angle1 = 5*Math.PI/8;
-	angle2 = 6*Math.PI/8;
+	len1 = Number(document.getElementById("len1-input").value);
+	len2 = Number(document.getElementById("len2-input").value);
+	mass1 = Number(document.getElementById("mass1-input").value);
+	mass2 = Number(document.getElementById("mass2-input").value);
+	angle1 = 1*Math.PI/8;
+	angle2 = 1*Math.PI/4;
 	vel1 = 0;
 	vel2 = 0;
-	g = 9.81
-	damp = 0.001;
+	g = Number(document.getElementById("g-input").value)
+	dampRate = Number(document.getElementById("dampRate-input").value);
 	firstFrame = true;
 	xoffset = width/2;
 	yoffset = height/4;
@@ -42,48 +43,26 @@ function setup() {
 	startButtonTime = millis();
 }
 
-function draw() {	
-	image(trail, 0, 0)
+function draw() {
 
 	let acc1 = (-g*(2*mass1+mass2)*Math.sin(angle1) - mass2*g*Math.sin(angle1-2*angle2) - 2*Math.sin(angle1-angle2)*mass2*(vel2*vel2*len2+vel1*vel1*len1*Math.cos(angle1-angle2))) / (len1*(2*mass1+mass2-mass2*Math.cos(2*angle1-2*angle2)))
 	let acc2 = (2*Math.sin(angle1-angle2)*(vel1*vel1*len1*(mass1+mass2)+g*(mass1+mass2)*Math.cos(angle1)+vel2*vel2*len2*mass2*Math.cos(angle1-angle2)))/(len2*(2*mass1+mass2-mass2*Math.cos(2*angle1-2*angle2)))
-
-	stroke(color.primary);
-	strokeWeight(4);
-	translate(xoffset, yoffset)
-
-	let x1 = (len1*100) * Math.sin(angle1);
-	let y1 = (len1*100) * Math.cos(angle1);
-
-	let x2 = x1 + (len2*100) * Math.sin(angle2);
-	let y2 = y1 + (len2*100) * Math.cos(angle2);
-	
-	line(0,0,x1,y1);
-	line(x1,y1,x2,y2);
-
-	stroke(color.theme)
-	fill(color.primary);
-	ellipse(x1,y1,fancyLog(mass1),fancyLog(mass1))
-	ellipse(x2,y2,fancyLog(mass2),fancyLog(mass2))
 
 	let dt = 1 / frameRate()
 	if (frameRate() <= 2 || frameRate() >= 9000) { 
 		dt = 0.01667 // if low or high just assume 60 fps
 		// I don't like this solution but it actually works so whatever
 	}
-	document.getElementById("fps").innerHTML = `FPS: ${frameRate()}`
-	document.getElementById("delta").innerHTML = `Delta: ${dt}`
-	document.getElementById("seconds").innerHTML = `Calculated Seconds: ${Math.floor(frameCount * dt * 10) / 10}`;
 
-	console.log(dt)
+	let netAcc1 = acc1 - (dampRate * vel1)
+	let netAcc2 = acc2 - (dampRate * vel2)
 
-	vel1 += acc1 * dt;
-	vel2 += acc2 * dt;
+	vel1 += netAcc1 * dt;
+	vel2 += netAcc2 * dt;
 	angle1 += vel1 * dt;
 	angle2 += vel2 * dt;
 
-	/* vel1 *= (1 - damp) * dt;
-	vel2 *= (1 - damp) * dt; */
+	updateScreen()
 
 	trail.stroke(color.secondary)
 	trail.strokeWeight(4);
@@ -97,6 +76,29 @@ function draw() {
 
 	px2 = x2;
 	py2 = y2;
+}
+
+function updateScreen(updating=false) {
+	if (!updating) {image(trail, 0, 0)}
+	if (updating) {image(trail, -xoffset, -yoffset)}
+
+	stroke(color.primary);
+	strokeWeight(4);
+
+	if (!updating) {translate(xoffset, yoffset)}
+
+	x1 = (len1*100) * Math.sin(angle1);
+	y1 = (len1*100) * Math.cos(angle1);
+	x2 = x1 + (len2*100) * Math.sin(angle2);
+	y2 = y1 + (len2*100) * Math.cos(angle2);
+	
+	line(0,0,x1,y1);
+	line(x1,y1,x2,y2);
+
+	stroke(color.theme)
+	fill(color.primary);
+	ellipse(x1,y1,fancyLog(mass1),fancyLog(mass1))
+	ellipse(x2,y2,fancyLog(mass2),fancyLog(mass2))
 }
 
 window.onresize = () => {
@@ -126,7 +128,7 @@ document.getElementById("pause-button").addEventListener("click", () => {
 });
 
 document.getElementById("play-button").addEventListener("click", () => {
-	if (millis() - startButtonTime <= 500) {
+	if (millis() - startButtonTime <= 500 || millis() - restartButtonTime <= 500) {
 		console.log(`Ignored, it's only been ${millis() - restartButtonTime} ms.`)
 		return;
 	}
@@ -136,3 +138,51 @@ document.getElementById("play-button").addEventListener("click", () => {
 function fancyLog(n) {
 	return 20 * Math.log2(n + 16) - 80;
 }
+
+document.getElementById("mass1-input").addEventListener("change", () => {
+	mass1 = Number(document.getElementById("mass1-input").value)
+	document.getElementById("mass1-output").innerHTML = mass1 + " kg"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("mass2-input").addEventListener("change", () => {
+	mass2 = Number(document.getElementById("mass2-input").value)
+	document.getElementById("mass2-output").innerHTML = mass2 + " kg"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("len1-input").addEventListener("change", () => {
+	len1 = Number(document.getElementById("len1-input").value)
+	document.getElementById("len1-output").innerHTML = len1 + " m"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("len2-input").addEventListener("change", () => {
+	len2 = Number(document.getElementById("len2-input").value)
+	document.getElementById("len2-output").innerHTML = len2 + " m"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("g-input").addEventListener("change", () => {
+	g = Number(document.getElementById("g-input").value)
+	document.getElementById("g-output").innerHTML = g + " m/s²"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("dampRate-input").addEventListener("change", () => {
+	dampRate = Number(document.getElementById("dampRate-input").value);
+	document.getElementById("dampRate-output").innerHTML = dampRate + " m/s²"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});

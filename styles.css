@@ -66,6 +66,11 @@ a:hover {
 	color: var(--secondary);
 }
 
+.group > p {
+	color: var(--secondary);
+	font-style: italic;
+}
+
 .parameter > input {
 	width: 100%;
 	background-color: pink
