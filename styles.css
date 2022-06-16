@@ -82,6 +82,10 @@ h2 {
 	text-align: center;
 }
 
+.box > .description p {
+	font-style: normal;
+}
+
 .parameter > input {
 	width: 100%;
 	background-color: pink
