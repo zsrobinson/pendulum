@@ -1,3 +1,9 @@
 # Double Pendulum Simulation
 
-Work in Progress
+View project: https://pendulum.zsrobinson.com
+
+A simulation of a Double Pendulum demonstrating Chaos Theory. According to [Britannica](https://www.britannica.com/science/chaos-theory), Chaos Theory is "the study of apparently random or unpredictable behaviour in systems governed by deterministic laws". Due to slight variations in the adjustments to make timing constant despite variable refresh rates, a slight amount of randomness is introduced into the system, mirroring the unpredictability that would also occur in real life. I've tried my best to make the units make sense, and while they *should* be pretty accurate as to real life and certainly look that way, I'm not 100% sure if it is 100% accurate. Furthermore, there are sliders on the right-hand side to adjust different aspects of this simulation. Most sliders can be changed at any point, but it's best to adjust the angle when the simulation is paused as it is constantly updating when the simulation is running.
+
+Equations for calculating the acceleration were sourced from [myPhysicsLab](https://www.myphysicslab.com/pendulum/double-pendulum-en.html), who did a very similar simulation (though, I'd like to add that I think mine looks better haha). The method of integration I used simply adds the net acceleration (calculated minus damping) to the velocity, and then the velocity to the position. While this works fine and was one of the first concepts we learned in Honors Physics, more sophisticated methods of integration do a better job at this, especially under greater demand. Just try setting all the sliders except damping to max and turning off damping, and you'll see that after a few seconds the model starts to move so fast that it just disappears completely. I'm not really sure why is does that, but it shows that there could be better methods of integration.
+
+This simulation relies on [p5.js](https://p5js.org) to add tools for drawing to the HTML5 Canvas. Other than that, everything was coded in vanilla HTML, CSS, and JavaScript (for better or worse).
