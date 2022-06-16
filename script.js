@@ -17,8 +17,8 @@ function setVars() {
 	len2 = Number(document.getElementById("len2-input").value);
 	mass1 = Number(document.getElementById("mass1-input").value);
 	mass2 = Number(document.getElementById("mass2-input").value);
-	angle1 = 1*Math.PI/8;
-	angle2 = 1*Math.PI/4;
+	angle1 = Number(document.getElementById("angle1-input").value) * (Math.PI / 180);
+	angle2 = Number(document.getElementById("angle2-input").value) * (Math.PI / 180);
 	vel1 = 0;
 	vel2 = 0;
 	g = Number(document.getElementById("g-input").value)
@@ -61,6 +61,12 @@ function draw() {
 	vel2 += netAcc2 * dt;
 	angle1 += vel1 * dt;
 	angle2 += vel2 * dt;
+
+	document.getElementById("angle1-input").value = Math.round(angle1 * (180/Math.PI));
+	document.getElementById("angle1-output").innerHTML = Math.round(angle1 * (180/Math.PI)) + "°";
+
+	document.getElementById("angle2-input").value = Math.round(angle2 * (180/Math.PI));
+	document.getElementById("angle2-output").innerHTML = Math.round(angle2 * (180/Math.PI)) + "°";
 
 	updateScreen()
 
@@ -115,9 +121,13 @@ document.getElementById("restart-button").addEventListener("click", () => {
 		return;
 	}
 	restartButtonTime = millis();
-	
 	loop();
+	document.getElementById("angle1-input").value = 45;
+	document.getElementById("angle1-output").innerHTML = "45°";
+	document.getElementById("angle2-input").value = 90;
+	document.getElementById("angle2-output").innerHTML = "90°";
 	setVars();
+
 	trail.background(color.theme);
 	noLoop();
 });
@@ -182,6 +192,22 @@ document.getElementById("g-input").addEventListener("change", () => {
 document.getElementById("dampRate-input").addEventListener("change", () => {
 	dampRate = Number(document.getElementById("dampRate-input").value);
 	document.getElementById("dampRate-output").innerHTML = dampRate + " m/s²"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("angle1-input").addEventListener("change", () => {
+	angle1 = Number(document.getElementById("angle1-input").value) * (Math.PI / 180);
+	document.getElementById("angle1-output").innerHTML = Math.round(angle1 * (180/Math.PI)) + "°"
+	if (!isLooping()) {
+		updateScreen(true)
+	}
+});
+
+document.getElementById("angle2-input").addEventListener("change", () => {
+	angle2 = Number(document.getElementById("angle2-input").value) * (Math.PI / 180);
+	document.getElementById("angle2-output").innerHTML = Math.round(angle2 * (180/Math.PI)) + "°"
 	if (!isLooping()) {
 		updateScreen(true)
 	}

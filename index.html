@@ -1,103 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Double Pendulum</title>
+		<link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+		<link rel="stylesheet" href="styles.css" />
+		<script src="p5.min.js" defer></script>
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<div class="page">
+			<div class="side">
+				<div class="box">
+					<h1>Double Pendulum</h1>
+					<div class="description">
+						<p>Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
+						<p>View this project on <a href="https://github.com/zsrobinson/pendulum">GitHub</a></p>	
+					</div>
+					<p>Units may not be to scale.</p>
+				</div>
+				<div class="box" id="time-controls">
+					<h2>Time Controls</h2>
+					<div>
+						<button id="play-button">
+							<i class="fa-solid fa-play"></i>
+							<!-- <span>Start</span> -->
+						</button>
+						<button id="pause-button">
+							<i class="fa-solid fa-pause"></i>
+							<!-- <span>Pause</span> -->
+						</button>
+						<button id="restart-button">
+							<i class="fa-solid fa-arrow-rotate-right"></i>
+							<!-- <span>Restart</span> -->
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="side">
+				<div class="box">
+					<h2>Parameters</h2>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-earth-americas"></i>
+							<strong>Force of Gravity</strong>
+							<p id="g-output">9.81 m/s²</p>
+						</div>
+						<input type="range" id="g-input" min="1" max="50" value="9.81" step="0.01">
+					</div>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-feather-pointed"></i>
+							<strong>Damping</strong>
+							<p id="dampRate-output">0.05 m/s²</p>
+						</div>
+						<input type="range" id="dampRate-input" min="0" max="1" value="0.05" step=".025">
+					</div>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Double Pendulum</title>
+					<!-- ONE -->
+					<p></p>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-ruler"></i>
+							<strong>Length 1</strong>
+							<p id="len1-output">1.5 m</p>
+						</div>
+						<input type="range" id="len1-input" min="0.5" max="5" value="2" step="0.1">
+					</div>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-weight-hanging"></i>
+							<strong>Mass 1</strong>
+							<p id="mass1-output">30 kg</p>
+						</div>
+						<input type="range" id="mass1-input" min="10" max="100" value="30">
+					</div>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-circle-dot"></i>
+							<strong>Angle 1</strong>
+							<p id="angle1-output">45°</p>
+						</div>
+						<input type="range" id="angle1-input" min="-180" max="180" value="45" step="5">
+					</div>
 
-	<link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
-	<link rel="stylesheet" href="styles.css" />
-	<script src="p5.min.js" defer></script>
-	<script src="script.js" defer></script>
-</head>
-
-<body>
-	<div class="sim" id="sim"></div>
-	<div class="controls">
-		<div class="header">
-			<h1>Double Pendulum Simulation</h1>
-			<p>Created by <a href="https://zsrobinson.com">Zachary Robinson</a></p>
-			<p>View this project on <a href="https://github.com/zsrobinson/pendulum">GitHub</a></p>	
+					<!-- TWO -->
+					<p></p>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-ruler"></i>
+							<strong>Length 2</strong>
+							<p id="len2-output">1.5 m</p>
+						</div>
+						<input type="range" id="len2-input" min="0.5" max="5" value="2" step="0.1">
+					</div>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-weight-hanging"></i>
+							<strong>Mass 2</strong>
+							<p id="mass2-output">30 kg</p>
+						</div>
+						<input type="range" id="mass2-input" min="10" max="100" value="30">
+					</div>
+					<div class="parameter">
+						<div>
+							<i class="fa-solid fa-circle-dot"></i>
+							<strong>Angle 2</strong>
+							<p id="angle2-output">90°</p>
+						</div>
+						<input type="range" id="angle2-input" min="-180" max="180" value="90" step="5">
+					</div>
+				</div>
+			</div>
 		</div>
-	
-		<div class="group" id="time-controls">
-			<h2>Time Controls</h2>
-			<div>
-				<button id="play-button">
-					<i class="fa-solid fa-play"></i>
-					<span>Start</span>
-				</button>
-				<button id="pause-button">
-					<i class="fa-solid fa-pause"></i>
-					<span>Pause</span>
-				</button>
-				<button id="restart-button">
-					<i class="fa-solid fa-arrow-rotate-right"></i>
-					<span>Restart</span>
-				</button>
-			</div>
-		</div>
-
-		<div class="group" id="parameters">
-			<h2>Parameters</h2>
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-earth-americas"></i>
-					<strong>Force of Gravity</strong>
-					<p id="g-output">9.81 m/s²</p>
-				</div>
-				<input type="range" id="g-input" min="1" max="30" value="9.81" step="0.01">
-			</div>
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-feather-pointed"></i>
-					<strong>Damping</strong>
-					<p id="dampRate-output">0.05 m/s²</p>
-				</div>
-				<input type="range" id="dampRate-input" min="0" max="1" value="0.05" step=".025">
-			</div>
-
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-ruler"></i>
-					<strong>Length 1</strong>
-					<p id="len1-output">1.5 m</p>
-				</div>
-				<input type="range" id="len1-input" min="0.5" max="5" value="1.5" step="0.1">
-			</div>
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-weight-hanging"></i>
-					<strong>Mass 1</strong>
-					<p id="mass1-output">30 kg</p>
-				</div>
-				<input type="range" id="mass1-input" min="10" max="100" value="30">
-			</div>
-
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-ruler"></i>
-					<strong>Length 2</strong>
-					<p id="len2-output">1.5 m</p>
-				</div>
-				<input type="range" id="len2-input" min="0.5" max="5" value="1.5" step="0.1">
-			</div>
-			<div class="parameter">
-				<div>
-					<i class="fa-solid fa-weight-hanging"></i>
-					<strong>Mass 2</strong>
-					<p id="mass2-output">30 kg</p>
-				</div>
-				<input type="range" id="mass2-input" min="10" max="100" value="30">
-			</div>
-			<p>Units may not be to scale.</p>	
-
-
-		</div>
-
-	</div>
-</body>
-
+		<div class="sim" id="sim"></div>
+	</body>
 </html>

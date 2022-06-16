@@ -5,6 +5,7 @@
 	--secondary: rgb(155, 156, 157);
 	--tertiary: rgb(65, 66, 68);
 	--border: rgb(51, 51, 51);
+	--side-color: rgba(53, 53, 58, 0.85);
 }
 
 * {
@@ -17,7 +18,6 @@ body, button {
 	color: var(--primary);
 	background-color: var(--theme);
 }
-
 a {
 	color: #83a8cd;
 	text-decoration: none;
@@ -28,24 +28,34 @@ a:hover {
     transition: all ease 100ms;
 }
 
-.controls {
-	margin: 1rem;
-	display: inline-flex;
-	flex-direction: column;
-	align-items: baseline;
-	gap: 1rem
+.page {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	flex-direction: row;
 }
 
-.controls > .group {
+.box {
 	padding: 1rem;
+	margin: 1rem;
+	margin-bottom: 0;
 	border-radius: 1rem;
 	display: inline-flex;
 	flex-direction: column;
-	background-color: var(--entry);
-	gap: 1rem;
+	background-color: var(--side-color);
+	gap: 0.75rem;
 }
 
-.controls > .group > h2 {
+.side {
+	display: flex;
+	flex-direction: column;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
 	color: var(--secondary);
 	font-size: 1rem;
 	text-transform: uppercase;
@@ -66,9 +76,10 @@ a:hover {
 	color: var(--secondary);
 }
 
-.group > p {
+.box p {
 	color: var(--secondary);
 	font-style: italic;
+	text-align: center;
 }
 
 .parameter > input {
@@ -76,20 +87,21 @@ a:hover {
 	background-color: pink
 }
 
-#time-controls > div {
-	display: flex;
-	flex-direction: row;
-	gap: 0.5rem
-}
-
 button {
-	font-size: 1rem;
+	font-size: 1.5rem;
 	background: var(--entry);
 	border: var(--theme) 4px solid;
     border-radius: .5rem;
     padding: .5rem 0.75rem;
     transition: all ease 100ms;
 	cursor: pointer;
+
+	height: 4rem;
+	width: 4rem;
+}
+
+#time-controls {
+	align-items: center;
 }
 
 button:active{
@@ -105,7 +117,6 @@ button > span {
 }
 
 .sim {
-	/* fill up the entire screen */
 	position: fixed;
 	padding: 0;
 	margin: 0;
@@ -113,7 +124,5 @@ button > span {
 	left: 0;
 	width: 100%;
 	height: 100%;
-
-	/* set behind everything else */
 	z-index: -100;
 }
