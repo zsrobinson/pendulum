@@ -88,7 +88,7 @@ function updateScreen(updating=false) {
 	if (!updating) {image(trail, 0, 0)}
 	if (updating) {image(trail, -xoffset, -yoffset)}
 
-	stroke(color.primary);
+	stroke(color.secondary);
 	strokeWeight(4);
 
 	if (!updating) {translate(xoffset, yoffset)}
